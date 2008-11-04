@@ -21,6 +21,7 @@
 #include "DataFormats/Provenance/interface/ProductID.h"
 #include "DataFormats/Provenance/interface/ParameterSetID.h"
 #include "DataFormats/Provenance/interface/ParameterSetBlob.h"
+#include "DataFormats/Provenance/interface/History.h"
 #include "DataFormats/Provenance/interface/ProcessHistory.h"
 #include "DataFormats/Provenance/interface/ProductStatus.h"
 #include "DataFormats/Provenance/interface/ProvenanceFwd.h"
@@ -79,15 +80,17 @@ namespace edm {
   class SendEvent {
   public:
     SendEvent() { }
-    SendEvent(EventAuxiliary const& aux, ProcessHistory const& processHistory) :
-	aux_(aux), processHistory_(processHistory), products_() {}
+    SendEvent(EventAuxiliary const& aux, ProcessHistory const& processHistory, History const& history) :
+	aux_(aux), processHistory_(processHistory), history_(history), products_() {}
     EventAuxiliary const& aux() const {return aux_;}
     SendProds const& products() const {return products_;}
     ProcessHistory const& processHistory() const {return processHistory_;}
+    History const& history() const {return history_;}
     SendProds & products() {return products_;}
   private:
     EventAuxiliary aux_;
     ProcessHistory processHistory_;
+    History history_;
     SendProds products_;
 
     // other tables necessary for provenance lookup
