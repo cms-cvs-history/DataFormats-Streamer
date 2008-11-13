@@ -34,14 +34,13 @@ namespace edm {
 
   class StreamedProduct {
   public:
-    StreamedProduct() : prod_(0), desc_(0), mod_(), productID_(), status_(productstatus::neverCreated()), parents_(0) {}
+    StreamedProduct() : prod_(0), desc_(0), mod_(), status_(productstatus::neverCreated()), parents_(0) {}
     explicit StreamedProduct(BranchDescription const& desc) :
-	prod_(0), desc_(&desc), mod_(), productID_(), status_(productstatus::neverCreated()), parents_(0) {}
+	prod_(0), desc_(&desc), mod_(), status_(productstatus::neverCreated()), parents_(0) {}
 
     StreamedProduct(EDProduct const* prod,
 		    BranchDescription const& desc,
 		    ModuleDescriptionID const& mod,
-		    ProductID pid,
 		    ProductStatus status,
 		    std::vector<BranchID> const* parents);
 
@@ -49,7 +48,6 @@ namespace edm {
     BranchDescription const* desc() const {return desc_;}
     ModuleDescriptionID const& mod() const {return mod_;}
     BranchID branchID() const {return desc_->branchID();}
-    ProductID productID() const {return productID_;}
     ProductStatus status() const {return status_;}
     std::vector<BranchID> const* parents() const {return parents_;}
 
@@ -57,7 +55,6 @@ namespace edm {
      prod_= 0;
      delete desc_;
      desc_= 0;
-     productID_ = ProductID();
      status_ = productstatus::neverCreated();
      delete parents_;
      parents_ = 0;
@@ -67,7 +64,6 @@ namespace edm {
     EDProduct const* prod_;
     BranchDescription const* desc_;
     ModuleDescriptionID  mod_;
-    ProductID productID_;
     ProductStatus status_;
     std::vector<BranchID> const* parents_;
   };
