@@ -26,6 +26,7 @@
 #include "DataFormats/Provenance/interface/ProductStatus.h"
 #include "DataFormats/Provenance/interface/ProvenanceFwd.h"
 #include "DataFormats/Provenance/interface/BranchIDList.h"
+#include "DataFormats/Provenance/interface/ParameterSetIDList.h"
 
 namespace edm {
 
@@ -103,16 +104,19 @@ namespace edm {
     ParameterSetMap const& processParameterSet() const {return processParameterSet_;}
     ModuleDescriptionMap const& moduleDescriptionMap() const {return moduleDescriptionMap_;}
     BranchIDLists const& branchIDLists() const {return branchIDLists_;}
+    ParameterSetIDLists const& parameterSetIDLists() const {return parameterSetIDLists_;}
     void push_back(BranchDescription const& bd) {descs_.push_back(bd);}
     void setParameterSetMap(ParameterSetMap const& psetMap) {processParameterSet_ = psetMap;}
     void setModuleDescriptionMap(ModuleDescriptionMap const& mdMap) {moduleDescriptionMap_ = mdMap;}
     void setBranchIDLists(BranchIDLists const& bidlists) {branchIDLists_ = bidlists;}
+    void setParameterSetIDLists(ParameterSetIDLists const& psetidlists) {parameterSetIDLists_ = psetidlists;}
 
   private:
     SendDescs descs_;
     ParameterSetMap processParameterSet_;
     ModuleDescriptionMap moduleDescriptionMap_;
     BranchIDLists branchIDLists_;
+    ParameterSetIDLists parameterSetIDLists_;
     // trigger bit descriptions will be added here and permanent
     //  provenance values
   };
