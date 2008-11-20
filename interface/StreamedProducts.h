@@ -35,19 +35,17 @@ namespace edm {
 
   class StreamedProduct {
   public:
-    StreamedProduct() : prod_(0), desc_(0), mod_(), status_(productstatus::neverCreated()), parents_(0) {}
+    StreamedProduct() : prod_(0), desc_(0), status_(productstatus::neverCreated()), parents_(0) {}
     explicit StreamedProduct(BranchDescription const& desc) :
-	prod_(0), desc_(&desc), mod_(), status_(productstatus::neverCreated()), parents_(0) {}
+	prod_(0), desc_(&desc), status_(productstatus::neverCreated()), parents_(0) {}
 
     StreamedProduct(EDProduct const* prod,
 		    BranchDescription const& desc,
-		    ModuleDescriptionID const& mod,
 		    ProductStatus status,
 		    std::vector<BranchID> const* parents);
 
     EDProduct const* prod() const {return prod_;}
     BranchDescription const* desc() const {return desc_;}
-    ModuleDescriptionID const& mod() const {return mod_;}
     BranchID branchID() const {return desc_->branchID();}
     ProductStatus status() const {return status_;}
     std::vector<BranchID> const* parents() const {return parents_;}
@@ -64,7 +62,6 @@ namespace edm {
   private:
     EDProduct const* prod_;
     BranchDescription const* desc_;
-    ModuleDescriptionID  mod_;
     ProductStatus status_;
     std::vector<BranchID> const* parents_;
   };
@@ -102,19 +99,16 @@ namespace edm {
     SendJobHeader() { }
     SendDescs const& descs() const {return descs_;}
     ParameterSetMap const& processParameterSet() const {return processParameterSet_;}
-    ModuleDescriptionMap const& moduleDescriptionMap() const {return moduleDescriptionMap_;}
     BranchIDLists const& branchIDLists() const {return branchIDLists_;}
     ParameterSetIDLists const& parameterSetIDLists() const {return parameterSetIDLists_;}
     void push_back(BranchDescription const& bd) {descs_.push_back(bd);}
     void setParameterSetMap(ParameterSetMap const& psetMap) {processParameterSet_ = psetMap;}
-    void setModuleDescriptionMap(ModuleDescriptionMap const& mdMap) {moduleDescriptionMap_ = mdMap;}
     void setBranchIDLists(BranchIDLists const& bidlists) {branchIDLists_ = bidlists;}
     void setParameterSetIDLists(ParameterSetIDLists const& psetidlists) {parameterSetIDLists_ = psetidlists;}
 
   private:
     SendDescs descs_;
     ParameterSetMap processParameterSet_;
-    ModuleDescriptionMap moduleDescriptionMap_;
     BranchIDLists branchIDLists_;
     ParameterSetIDLists parameterSetIDLists_;
     // trigger bit descriptions will be added here and permanent
